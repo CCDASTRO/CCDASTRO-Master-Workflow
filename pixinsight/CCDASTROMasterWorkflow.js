@@ -6,10 +6,13 @@
 #include <pjsr/DataType.jsh>
 #include "MasterTools.js"
 
-var TITLE="CCDASTRO Master Workflow 0.1.1";
+var TITLE="CCDASTRO Master Workflow 0.2.0";
 var selectedTool=null;
 function installedScript(tool) {
-   return CoreApplication.srcDirPath+"/scripts/"+tool.script;
+   var root=CoreApplication.srcDirPath+"/scripts/";
+   var paths=[tool.script].concat(tool.alternates||[]);
+   for(var i=0;i<paths.length;i++)if(File.exists(root+paths[i]))return root+paths[i];
+   return root+tool.script;
 }
 function scriptHasSignature(path) {
    if(!File.exists(path.replace(/\.js$/i,".xsgn")))return false;
@@ -47,7 +50,7 @@ class MasterDialog extends Dialog {
       self.folders[name]=e;self.folderRows.push({name:name,control:wrap});self.folderBox.sizer.add(wrap);
    });this.sizer.add(this.folderBox);
    var toolBox=new GroupBox(this);toolBox.title="Choose an existing method";toolBox.sizer=new VerticalSizer;toolBox.sizer.margin=8;toolBox.sizer.spacing=5;
-   var stages=["Batch preprocessing","Calibration","Preparation / extraction","Registration","Integration / masters","Channel combination"];
+   var stages=["Batch preprocessing","Calibration","Preparation / extraction","Registration","Integration / masters","Plate solving","OSC narrowband extraction","Channel combination"];
    stages.forEach(function(stage){
       var wrap=new Control(toolBox);wrap.sizer=new HorizontalSizer;wrap.sizer.spacing=6;
       var l=new Label(wrap);l.text=stage;l.setFixedWidth(175);wrap.sizer.add(l);

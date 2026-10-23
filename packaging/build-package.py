@@ -4,7 +4,7 @@ from datetime import datetime, timezone
 import hashlib, zipfile
 
 root=Path(__file__).resolve().parent.parent
-version='0.1.1'
+version='0.2.0'
 names=['CCDASTROMasterWorkflow.js','MasterTools.js','CCDASTROMasterWorkflow.xsgn']
 for name in names:
     p=root/'pixinsight'/name
@@ -15,7 +15,7 @@ for name in names:
             raise SystemExit('Signed source must use UTF-8 without BOM and CRLF: '+name)
 out=root/'updates';out.mkdir(exist_ok=True)
 manifest=out/'updates.xri'
-if manifest.exists() and b'<Signature' in manifest.read_bytes():
+if manifest.exists() and b'<Signature' in manifest.read_bytes() and f'CCDASTROMasterWorkflow-{version}.zip'.encode() in manifest.read_bytes():
     raise SystemExit('Manifest is already signed. Do not rebuild it. Prepare a new version instead.')
 package=out/f'CCDASTROMasterWorkflow-{version}.zip'
 with zipfile.ZipFile(package,'w',zipfile.ZIP_DEFLATED) as z:

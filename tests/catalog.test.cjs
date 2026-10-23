@@ -20,3 +20,22 @@ assert(!ui.includes('#include <pjsr/Sizer.jsh>'),'V8 already supplies the sizer 
 assert(ui.includes('class MasterDialog extends Dialog'),'Use the native V8 class constructor');
 new (require('node:vm').Script)(ui.replace(/^#.*$/gm,''));
 console.log('Catalog, session plan roundtrips, rejected invalid choices and launch-only boundaries passed.');
+
+const nb=catalog.tools.find(t=>t.id==='nbextract');
+assert.equal(nb.stage,'OSC narrowband extraction');
+assert.equal(nb.script,'NBExtractPI.js');
+assert.deepEqual(nb.alternates,['Lighthouse/NBExtractPI/NBExtractPI.js']);
+assert(catalog.tools.some(t=>t.id==='solve'&&t.script==='ImageSolver/ImageSolver.js'));
+// Old v0.1.1 plans remain valid when new optional stages are absent.
+for(const profile of catalog.profiles){
+ const p=catalog.plan(profile,'','',Object.fromEntries(profile.channels.map(c=>[c,''])),{Registration:'align'});
+ assert.equal(catalog.validate(p),profile);
+}
+
+const resolverSource=ui.slice(ui.indexOf('function installedScript('),ui.indexOf('function scriptHasSignature('));
+const vm=require('node:vm');
+for(const available of ['NBExtractPI.js','Lighthouse/NBExtractPI/NBExtractPI.js',null]){
+ const ctx={CoreApplication:{srcDirPath:'/pi/src'},File:{exists:p=>p==='/pi/src/scripts/'+available}};
+ vm.createContext(ctx);vm.runInContext(resolverSource,ctx);
+ assert.equal(ctx.installedScript(nb),'/pi/src/scripts/'+(available||'NBExtractPI.js'));
+}

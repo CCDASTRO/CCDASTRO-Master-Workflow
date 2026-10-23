@@ -12,3 +12,7 @@
 - Actual tool dispatch and processing remain to be tested; the native check only rendered the launcher and inspected installed script signatures.
 - No calibration, registration, integration or combination was run on user images. No actual master outputs were generated or validated.
 - Unsigned development prototype; not a published updater release.
+
+## v0.2.0
+
+All five updated native UI profiles rendered at 790 pixels wide and 568-718 pixels tall. NBExtractPI and ImageSolver were detected and their installed signatures verified valid. Session plan/catalog tests and loading old stage selections passed. New dual-band layout visually inspected. No NBExtractPI extraction, Gaia photometry or real-image processing was run; output quality remains the original tool's responsibility. v0.2.0 script and manifest signatures verified valid for CCDASTRO; exact signed package bytes and manifest checksum verified.

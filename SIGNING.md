@@ -1,4 +1,4 @@
-# Release signing - v0.1.1
+# Release signing - v0.2.0
 
 1. In PixInsight, open **Script > Development > CodeSign**. Select `pixinsight/CCDASTROMasterWorkflow.js` from this repository. Use your existing CCDASTRO developer certificate/key. The script identifier is **CCDASTROMasterWorkflow**. The local include `MasterTools.js` must remain beside it and be covered by the main script signature; do not sign or register it as a separate feature.
 2. Save `CCDASTROMasterWorkflow.xsgn` alongside the main script. Close CodeSign, leaving PixInsight open so native verification can run. Do not edit either source afterward.

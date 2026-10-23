@@ -1,3 +1,9 @@
+# v0.2.0 - OSC dual-band narrowband extraction shortcut
+
+Adds a dedicated OSC narrowband extraction row for separately installed NBExtractPI, plus ImageSolver for its plate-solving prerequisite. Detects the standard NBExtractPI location and falls back to the installed Lighthouse copy. Existing v0.1.1 session plans remain usable.
+
+The guide covers a linear, debayered, plate-solved L-Ultimate RGB integration, Gaia DR3/SP database setup, Ha/OIII with 3 nm passbands, explicit mixing calibration/extraction and saving the resulting mono masters. SII requires separate data. No new extraction algorithm, vendor source or automatic processing is included.
+
 # v0.1.1 - First development release
 
 One launcher for existing tools used to create masters from session datasets. Five acquisition profiles cover mono LRGB/Ha/OIII/SII, OSC, OSC plus dual/multiple narrowband filter sessions, and OSC plus mono narrowband data. Stage dropdowns include WBPP/FBPP, native calibration/preparation, registration, integration and channel-combination interfaces. Optional folder checklists and JSON session plans are remembered separately from processing.

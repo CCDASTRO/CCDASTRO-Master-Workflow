@@ -1,10 +1,10 @@
 # CCDASTRO Master Workflow
 
-Version 0.1.1 - signed development release.
+Version 0.2.0 - signed development release.
 
 ## Installation - start here
 
-**Current release: [v0.1.1](https://github.com/CCDASTRO/CCDASTRO-Master-Workflow/releases/tag/v0.1.1).** Script and updater-manifest signatures verified valid for CCDASTRO.
+**Current release: [v0.2.0](https://github.com/CCDASTRO/CCDASTRO-Master-Workflow/releases/tag/v0.2.0).** Includes NBExtractPI and ImageSolver shortcuts. Script and updater-manifest signatures verified valid for CCDASTRO.
 
 ### Recommended: PixInsight Update Manager
 
@@ -58,6 +58,8 @@ Folder rows are optional planning entries: unused filters can remain blank. Each
 | Preparation / extraction | CosmeticCorrection, Debayer, ChannelExtraction, BatchChannelExtraction |
 | Registration | StarAlignment, FFTRegistration |
 | Integration / masters | ImageIntegration, DrizzleIntegration |
+| Plate solving | ImageSolver |
+| OSC narrowband extraction | NBExtractPI (separately installed) |
 | Channel combination | ChannelCombination, LRGBCombination, NBRGBCombination |
 
 Scripts missing from the standard installation path are labeled not installed. Optional tools are not bundled. Scripts with an installed signature must verify before launching. Legacy scripts without a signature, such as the installed NBRGBCombination, open through normal PixInsight script handling; no arbitrary script path can be selected. Native process availability is checked when opening; errors leave images untouched.
@@ -65,6 +67,19 @@ Scripts missing from the standard installation path are labeled not installed. O
 WBPP/FBPP are complete batch routes, while the individual tools provide a manual route. Do not repeat processing stages already performed by a batch pipeline. Choose a common registration reference for data intended for combination. Drizzle requires the appropriate upstream drizzle data.
 
 An OSC filter's RGB planes are not necessarily pure Ha, OIII and SII. Select an extraction method appropriate to the camera and filter, using existing tools or saved processes. This prototype does not automate those expressions or infer filter transmission. NBRGBCombination has its own supported input mappings; it is not a universal OSC narrowband extractor.
+
+## Extract Ha and OIII from OSC L-Ultimate data (new in v0.2.0)
+
+1. Calibrate, debayer, register and integrate the dual-band OSC sessions with WBPP/FBPP or the individual existing tools. Keep the resulting **RGB master linear**; do not stretch before extraction.
+2. In Master Workflow choose the **OSC + Ha/OIII filter sessions** profile. Open **Plate solving > ImageSolver** and solve that RGB master. NBExtractPI also requires the Gaia process configured with local **Gaia DR3/SP XPSD** spectrum database files (the SPCC spectrum database).
+3. Reopen Master Workflow and choose **OSC narrowband extraction > NBExtractPI**. It is detected at its standard root script location, with the installed Lighthouse NBExtractPI location as a fallback. If neither is present, the row says not installed. Install/update NBExtractPI from its original distributor; it is not bundled here.
+4. In NBExtractPI select the linear, plate-solved RGB master. Choose **Ha / OIII**. For an Optolong **L-Ultimate**, set both line bandwidths to **3 nm**; use the actual filter specification for other filters.
+5. Click **1 - Calibrate Mixing Matrix**, inspect its report, then **2 - Extract Channels**. These are explicit actions in the existing vendor tool. It creates separate mono images such as **Ha_NBX** and **OIII_NBX**. Inspect and save those images using PixInsight.
+6. For additional SII, process a separately acquired SII/OIII filter dataset using the appropriate pair and bandwidths, or supply mono SII. The L-Ultimate records Ha/OIII and cannot supply missing SII. Register all intended masters to the same geometry, then open **ChannelCombination** for an HOO/SHO mapping or another existing combination tool for your intended output.
+
+This is emission-line extraction, distinct from plain RGB ChannelExtraction. NBExtractPI fits a mixing model using stars and Gaia spectra; inspect its conditioning/report and outputs rather than assuming perfect separation. Our launcher opens its existing interface without choosing a target, changing filter settings or executing extraction. A broadband OSC master is not a substitute for the dual-band master. A filter passing three lines at once is not automatically supported by this two-line extractor.
+
+The installed NBExtractPI documentation credits the extraction method to **Franklin Marek / Seti Astro's NBExtract**. Its PixInsight implementation remains separately maintained and licensed; no vendor source is copied or redistributed. L-Ultimate band specifications: https://www.optolong.com/cms/document/detail/id/192.html
 
 ## Credits
 
