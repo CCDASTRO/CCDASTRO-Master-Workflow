@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+*.snk
+*.pem
+*.key
+packaging/.stage/

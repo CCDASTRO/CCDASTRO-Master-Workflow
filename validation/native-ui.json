@@ -1,0 +1,62 @@
+{
+  "success": true,
+  "profiles": [
+    {
+      "id": "mono",
+      "width": 790,
+      "height": 666
+    },
+    {
+      "id": "osc",
+      "width": 790,
+      "height": 516
+    },
+    {
+      "id": "osc_dual",
+      "width": 790,
+      "height": 554
+    },
+    {
+      "id": "osc_filters",
+      "width": 790,
+      "height": 579
+    },
+    {
+      "id": "osc_mono",
+      "width": 790,
+      "height": 604
+    }
+  ],
+  "scripts": [
+    {
+      "id": "wbpp",
+      "path": "C:/Program Files/PixInsight/src/scripts/BatchPreprocessing/WBPP.js",
+      "exists": true,
+      "signatureVerified": true
+    },
+    {
+      "id": "fbpp",
+      "path": "C:/Program Files/PixInsight/src/scripts/BatchPreprocessing/FBPP.js",
+      "exists": true,
+      "signatureVerified": true
+    },
+    {
+      "id": "batch_extract",
+      "path": "C:/Program Files/PixInsight/src/scripts/BatchChannelExtraction/BatchChannelExtraction.js",
+      "exists": true,
+      "signatureVerified": true
+    },
+    {
+      "id": "fft",
+      "path": "C:/Program Files/PixInsight/src/scripts/FFTRegistration/FFTRegistration.js",
+      "exists": true,
+      "signatureVerified": true
+    },
+    {
+      "id": "nbrgb",
+      "path": "C:/Program Files/PixInsight/src/scripts/NBRGBCombination/NBRGBCombination.js",
+      "exists": true,
+      "signatureVerified": false
+    }
+  ]
+}

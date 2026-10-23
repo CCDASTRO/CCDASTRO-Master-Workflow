@@ -1,0 +1,6 @@
+* text=auto
+pixinsight/*.js text eol=crlf
+*.xsgn -text
+updates/*.xri -text
+*.zip -text
+*.png -text

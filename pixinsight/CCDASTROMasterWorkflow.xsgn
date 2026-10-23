@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+PixInsight XML Code Signature Format - XSGN version 1.0
+Created with PixInsight software - https://pixinsight.com/
+-->
+<xsgn version="1.0" xmlns="http://www.pixinsight.com/xsgn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.pixinsight.com/xsgn http://pixinsight.com/xsgn/xsgn-1.0.xsd">
+   <CreationTime>2026-10-23T23:06:05.162Z</CreationTime>
+   <Signature version="1.0" scriptId="CCDASTROMasterWorkflow" developerId="CCDASTRO">
+      <Timestamp>2026-10-23T23:06:05.162Z</Timestamp>
+      <CodeSignature encoding="Base64">tvIxUo2TOPYAKVwSM64sSCvKmWC9xhaqiTl088Lce3QW27jM5RrMCk9J8DgAIHbRZYAqJe0V/lX6RPSF5bdyDA==</CodeSignature>
+   </Signature>
+</xsgn>
