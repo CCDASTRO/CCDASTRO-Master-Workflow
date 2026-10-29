@@ -6,7 +6,7 @@
 #include <pjsr/DataType.jsh>
 #include "MasterTools.js"
 
-var TITLE="CCDASTRO Master Workflow 0.2.0";
+var TITLE="CCDASTRO Master Workflow 0.2.1";
 var selectedTool=null;
 function installedScript(tool) {
    var root=CoreApplication.srcDirPath+"/scripts/";
@@ -90,6 +90,7 @@ function openNative(id) {
    case "StarAlignment":process=new StarAlignment;break;
    case "ImageIntegration":process=new ImageIntegration;break;
    case "DrizzleIntegration":process=new DrizzleIntegration;break;
+   case "HDRComposition":process=new HDRComposition;break;
    case "ChannelCombination":process=new ChannelCombination;break;
    case "LRGBCombination":process=new LRGBCombination;break;
    default:throw new Error("Unsupported native process.");

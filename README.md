@@ -1,10 +1,10 @@
 # CCDASTRO Master Workflow
 
-Version 0.2.0 - signed development release.
+Version 0.2.1 - signed development release.
 
 ## Installation - start here
 
-**Current release: [v0.2.0](https://github.com/CCDASTRO/CCDASTRO-Master-Workflow/releases/tag/v0.2.0).** Includes NBExtractPI and ImageSolver shortcuts. Script and updater-manifest signatures verified valid for CCDASTRO.
+**Current release: [v0.2.1](https://github.com/CCDASTRO/CCDASTRO-Master-Workflow/releases/tag/v0.2.1).** Adds HDRComposition under Integration / masters; also includes NBExtractPI and ImageSolver shortcuts. Script and updater-manifest signatures verified valid for CCDASTRO.
 
 ### Recommended: PixInsight Update Manager
 
@@ -68,7 +68,7 @@ WBPP/FBPP are complete batch routes, while the individual tools provide a manual
 
 An OSC filter's RGB planes are not necessarily pure Ha, OIII and SII. Select an extraction method appropriate to the camera and filter, using existing tools or saved processes. This prototype does not automate those expressions or infer filter transmission. NBRGBCombination has its own supported input mappings; it is not a universal OSC narrowband extractor.
 
-## Extract Ha and OIII from OSC L-Ultimate data (new in v0.2.0)
+## Extract Ha and OIII from OSC L-Ultimate data (new in v0.2.1)
 
 1. Calibrate, debayer, register and integrate the dual-band OSC sessions with WBPP/FBPP or the individual existing tools. Keep the resulting **RGB master linear**; do not stretch before extraction.
 2. In Master Workflow choose the **OSC + Ha/OIII filter sessions** profile. Open **Plate solving > ImageSolver** and solve that RGB master. NBExtractPI also requires the Gaia process configured with local **Gaia DR3/SP XPSD** spectrum database files (the SPCC spectrum database).
@@ -88,3 +88,7 @@ All processing is performed by the original installed tools. PixInsight and its 
 ## Verification
 
 Run `node tests/catalog.test.cjs` for catalog and JSON-plan validation checks. Native PixInsight UI checks are recorded separately in VALIDATION.md. This prototype has not been qualified on real calibration/integration datasets and does not guarantee finished masters.
+
+## HDR composition
+
+Choose **Integration / masters > HDRComposition**, then **Open tool**. In PixInsight, select registered linear images of the same field with different exposure lengths and configure the native HDRComposition controls. Processing runs only when you explicitly execute that tool. This combines exposure sets; it is distinct from HDRMultiscaleTransform. Native tool launch and real-image HDR processing have not been tested for this release.

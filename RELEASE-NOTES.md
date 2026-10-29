@@ -1,3 +1,7 @@
+# v0.2.1 - HDR Composition shortcut
+
+Adds HDRComposition to Integration / masters. Opens the native PixInsight interface without executing processing. Use registered linear images of the same field at different exposure lengths. Existing session plans remain compatible. PixInsight verified the script and updater-manifest signatures; package checksum and packaged source bytes match. Native PixInsight interface dispatch has not yet been verified.
+
 # v0.2.0 - OSC dual-band narrowband extraction shortcut
 
 Adds a dedicated OSC narrowband extraction row for separately installed NBExtractPI, plus ImageSolver for its plate-solving prerequisite. Detects the standard NBExtractPI location and falls back to the installed Lighthouse copy. Existing v0.1.1 session plans remain usable.

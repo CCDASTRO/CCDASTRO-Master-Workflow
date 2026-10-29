@@ -16,3 +16,7 @@
 ## v0.2.0
 
 All five updated native UI profiles rendered at 790 pixels wide and 568-718 pixels tall. NBExtractPI and ImageSolver were detected and their installed signatures verified valid. Session plan/catalog tests and loading old stage selections passed. New dual-band layout visually inspected. No NBExtractPI extraction, Gaia photometry or real-image processing was run; output quality remains the original tool's responsibility. v0.2.0 script and manifest signatures verified valid for CCDASTRO; exact signed package bytes and manifest checksum verified.
+
+## v0.2.1
+
+Existing catalog, session-plan compatibility and launch-only checks passed. PixInsight verified both signatures for CCDASTRO. Package checksum and packaged source/signature bytes match the signed originals. Native HDRComposition interface dispatch and image processing were not tested.

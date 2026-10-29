@@ -4,12 +4,12 @@
       <p>CCDASTRO Master Workflow - existing tools for session masters.</p>
    </description>
    <platform os="all" arch="noarch" version="1.9.5:1.9.5">
-      <package fileName="CCDASTROMasterWorkflow-0.2.0.zip" sha1="8b47c233a1e1789ebce90cf107419850fb8cf84c" type="script" releaseDate="20261023232138">
-         <title>CCDASTRO Master Workflow 0.2.0</title>
+      <package fileName="CCDASTROMasterWorkflow-0.2.1.zip" sha1="265580c9210bb1c10dc06f78b2d0ad23537b64b0" type="script" releaseDate="20261029003256">
+         <title>CCDASTRO Master Workflow 0.2.1</title>
          <description>
             <p>A launch-only session planner for existing calibration, registration, integration and channel-combination tools. Includes mono LRGB/Ha/OIII/SII, OSC, OSC with filter sessions and OSC with mono narrowband data. Folder entries are a checklist, not automatic tool inputs. No processing runs automatically.</p>
          </description>
       </package>
    </platform>
 </xri>
-<Signature developerId="CCDASTRO" timestamp="2026-10-23T23:22:40.797Z" encoding="Base64">Lt166K5ZmoWB27Zm+pGvvoKaEHyM+ZxSGxdvmWeteNFRXjYR9W3MItudcn5ClS2pw4u5xZEIwSI5hTC2dcAhDw==</Signature>
+<Signature developerId="CCDASTRO" timestamp="2026-10-29T00:33:48.908Z" encoding="Base64">avH6F5/cCRle0bjKLTapsFdm2Ic0n/9pRoLMWSzbszYLjoFxCmCxuYojBjtcr1zhnI092hHLTq6YlKSRmbi/Bw==</Signature>
