@@ -1,0 +1,23 @@
+{
+  "exposures": [
+    1,
+    10,
+    100
+  ],
+  "sorted": [
+    "C:/Users/chuck/Documents/Codex/2026-10-25/wh/work/master-hdr/short.fits",
+    "C:/Users/chuck/Documents/Codex/2026-10-25/wh/work/master-hdr/medium.xisf",
+    "C:/Users/chuck/Documents/Codex/2026-10-25/wh/work/master-hdr/long.fits"
+  ],
+  "cancel": false,
+  "cancelClean": true,
+  "warnings": [
+    "Headers and pixel statistics cannot prove linearity. Confirm these are original linear masters, not saved display stretches.",
+    "Coarse registration checks cannot detect every subpixel shift, rotation or distortion. Confirm common-reference alignment at full resolution."
+  ],
+  "source": "var P = new HDRComposition;\nP.images = [ // enabled, path\n   [true, \"C:/Users/chuck/Documents/Codex/2026-10-25/wh/work/master-hdr/short.fits\"],\n   [true, \"C:/Users/chuck/Documents/Codex/2026-10-25/wh/work/master-hdr/medium.xisf\"],\n   [true, \"C:/Users/chuck/Documents/Codex/2026-10-25/wh/work/master-hdr/long.fits\"]\n];\nP.inputHints = \"\";\nP.maskBinarizingThreshold = 0.9000;\nP.maskSmoothness = 7;\nP.maskGrowth = 5;\nP.replaceLargeScales = 0;\nP.autoExposures = true;\nP.rejectBlack = true;\nP.useFittingRegion = false;\nP.fittingRectX0 = 0;\nP.fittingRectY0 = 0;\nP.fittingRectX1 = 0;\nP.fittingRectY1 = 0;\nP.generate64BitResult = true;\nP.outputMasks = true;\nP.closePreviousImages = false;\n",
+  "interfaceSupported": true,
+  "prepared": true,
+  "openCount": 3,
+  "cleaned": true
+}

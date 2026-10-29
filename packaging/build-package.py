@@ -4,8 +4,8 @@ from datetime import datetime, timezone
 import hashlib, zipfile
 
 root=Path(__file__).resolve().parent.parent
-version='0.2.1'
-names=['CCDASTROMasterWorkflow.js','MasterTools.js','CCDASTROMasterWorkflow.xsgn']
+version='0.3.0'
+names=['CCDASTROMasterWorkflow.js','MasterTools.js','HDRPrepare.js','CCDASTROMasterWorkflow.xsgn']
 for name in names:
     p=root/'pixinsight'/name
     if not p.is_file():raise SystemExit('Missing '+str(p)+'. Sign the main script before building.')

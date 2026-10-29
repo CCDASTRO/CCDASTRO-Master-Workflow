@@ -20,3 +20,7 @@ All five updated native UI profiles rendered at 790 pixels wide and 568-718 pixe
 ## v0.2.1
 
 Existing catalog, session-plan compatibility and launch-only checks passed. PixInsight verified both signatures for CCDASTRO. Package checksum and packaged source/signature bytes match the signed originals. Native HDRComposition interface dispatch and image processing were not tested.
+
+## v0.3.0 (signed development release)
+
+Existing catalog tests and focused HDR configuration/grouping/cleanup tests pass. Native PixInsight 1.9.5 reads exposure headers from synthetic FITS and XISF masters (1/10/100 seconds), sorts them correctly, opens the configured HDRComposition interface, and leaves no synthetic image windows after test cleanup. Cancellation cleanup passed. Native UI has three selectors and fits at 790 pixels wide (827 pixels high for the saved OSC+mono profile). No HDRComposition execution or real-image outcome tested. PixInsight verified the script and manifest signatures; the package checksum and all packaged sources/signature match.

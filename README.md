@@ -1,10 +1,10 @@
 # CCDASTRO Master Workflow
 
-Version 0.2.1 - signed development release.
+Version 0.3.0 - signed development release.
 
 ## Installation - start here
 
-**Current release: [v0.2.1](https://github.com/CCDASTRO/CCDASTRO-Master-Workflow/releases/tag/v0.2.1).** Adds HDRComposition under Integration / masters; also includes NBExtractPI and ImageSolver shortcuts. Script and updater-manifest signatures verified valid for CCDASTRO.
+**Current release: [v0.3.0](https://github.com/CCDASTRO/CCDASTRO-Master-Workflow/releases/tag/v0.3.0).** Adds three-master HDR preparation and automatic exposure-group detection; existing tools remain available. Script and updater-manifest signatures verified valid for CCDASTRO.
 
 ### Recommended: PixInsight Update Manager
 
@@ -18,10 +18,10 @@ Version 0.2.1 - signed development release.
 
 ### Manual testing or installation
 
-1. Download and extract the [release ZIP](https://github.com/CCDASTRO/CCDASTRO-Master-Workflow/releases). The update ZIP contains `src/scripts/CCDASTROMasterWorkflow/`; keep the two `.js` files and the `.xsgn` signature together. A GitHub source ZIP instead places the scripts in `pixinsight/`.
+1. Download and extract the [release ZIP](https://github.com/CCDASTRO/CCDASTRO-Master-Workflow/releases). The update ZIP contains `src/scripts/CCDASTROMasterWorkflow/`; keep the three `.js` files and the `.xsgn` signature together. A GitHub source ZIP instead places the scripts in `pixinsight/`.
 2. Keep that complete folder in a permanent location. In PixInsight choose **Script > Execute Script File**, then select `CCDASTROMasterWorkflow.js`. Do not execute the helper `MasterTools.js`.
 3. For a persistent menu entry, use **Script > Feature Scripts**, add the directory containing the main script, and regenerate the feature list. Look for **CCDASTRO > Master Workflow**.
-4. For a manual upgrade, close the launcher and replace all three files with the matching new version. Preserve any JSON session plans stored elsewhere. Do not mix a new include with an old signature.
+4. For a manual upgrade, close the launcher and replace all four files with the matching new version. Preserve any JSON session plans stored elsewhere. Do not mix a new include with an old signature.
 
 Tested UI scope: PixInsight 1.9.5 with the V8 runtime. No third-party tools are bundled. WBPP/FBPP and other script choices must be separately installed in their normal PixInsight locations. A source checkout is unsigned until CodeSign has been completed.
 
@@ -92,3 +92,12 @@ Run `node tests/catalog.test.cjs` for catalog and JSON-plan validation checks. N
 ## HDR composition
 
 Choose **Integration / masters > HDRComposition**, then **Open tool**. In PixInsight, select registered linear images of the same field with different exposure lengths and configure the native HDRComposition controls. Processing runs only when you explicitly execute that tool. This combines exposure sets; it is distinct from HDRMultiscaleTransform. Native tool launch and real-image HDR processing have not been tested for this release.
+
+## Prepare HDRComposition (v0.3.0)
+
+1. In the HDR Composition section browse to **Short**, **Medium** and **Long** registered linear masters (XISF or FITS). Or click **Auto-detect exposure groups**, select one master per exposure length, and let header metadata populate the slots in ascending order.
+2. Auto-detection reads EXPTIME/EXPOSURE and XISF Instrument:ExposureTime. Missing/conflicting exposure metadata, duplicate files, more/fewer than three exposure groups, and multiple masters in a group are rejected without changing the slots. It does not integrate frames or guess from filenames. Manual selection remains available when exposure headers are absent.
+3. Click **Prepare HDRComposition**. Existing unchanged input windows are reused; missing windows are opened. Dimensions and channels must match. Known stretch history is rejected; median statistics and coarse log-intensity correlation flag possible nonlinearity or registration offsets. These checks cannot prove linearity or subpixel registration, so confirm original linear data and common-reference alignment before continuing. An input open with unsaved changes is rejected.
+4. Review the pre-filled native HDRComposition interface, then execute it yourself. Automatic exposure evaluation, threshold 0.90, smoothness 7, growth 5, replace large scales 0, reject black pixels, 64-bit result and output masks are configured. Existing windows are not closed. Continue with the resulting linear HDR master in Workflow Manager.
+
+PixInsight 1.9.5 supports importing the configured instance through launchInterface(); native verification succeeded. No fallback icon is needed on this supported installation. Preparation never executes HDRComposition. New input windows close on cancellation/errors; pre-existing windows are preserved. Synthetic FITS/XISF header, preparation, cancellation and cleanup tests passed; real-image HDR output quality was not tested. Run `node tests/hdr.test.cjs` for focused regressions.

@@ -5,8 +5,9 @@
 #include <pjsr/StdIcon.jsh>
 #include <pjsr/DataType.jsh>
 #include "MasterTools.js"
+#include "HDRPrepare.js"
 
-var TITLE="CCDASTRO Master Workflow 0.2.1";
+var TITLE="CCDASTRO Master Workflow 0.3.0";
 var selectedTool=null;
 function installedScript(tool) {
    var root=CoreApplication.srcDirPath+"/scripts/";
@@ -65,6 +66,23 @@ class MasterDialog extends Dialog {
       };wrap.sizer.add(open);
       combo.onItemSelected=function(i){self.details.text=items[i].note;};toolBox.sizer.add(wrap);
    });this.sizer.add(toolBox);
+   var hdrBox=new GroupBox(this);hdrBox.title="HDR Composition — three exposure masters";hdrBox.sizer=new VerticalSizer;hdrBox.sizer.margin=8;hdrBox.sizer.spacing=4;
+   this.hdrSlots=[];
+   var hdrFilters=[["XISF / FITS masters","*.xisf *.fits *.fit *.fts"]];
+   ["Short","Medium","Long"].forEach(function(name){
+      var wrap=new Control(hdrBox);wrap.sizer=new HorizontalSizer;wrap.sizer.spacing=6;
+      var l=new Label(wrap);l.text=name;l.setFixedWidth(75);wrap.sizer.add(l);
+      var edit=new Edit(wrap);wrap.sizer.add(edit,100);self.hdrSlots.push(edit);
+      var browse=new PushButton(wrap);browse.text="Browse...";browse.onClick=function(){var d=new OpenFileDialog;d.caption="Select "+name.toLowerCase()+" exposure master";d.filters=hdrFilters;d.initialPath=edit.text;if(d.execute())edit.text=d.fileName;};wrap.sizer.add(browse);hdrBox.sizer.add(wrap);
+   });
+   try{var savedHDR=Settings.read("CCDASTRO/MasterWorkflow/hdrMasters",DataType_String);if(Settings.lastReadOK){var paths=JSON.parse(savedHDR);if(Array.isArray(paths)&&paths.length===3)paths.forEach(function(p,i){self.hdrSlots[i].text=String(p);});}}catch(ignore){}
+   var hdrNote=new Label(hdrBox);hdrNote.wordWrapping=true;hdrNote.text="Use registered linear masters of one field at three exposure lengths. Preparation opens inputs and a configured native interface; it never runs HDRComposition.";hdrBox.sizer.add(hdrNote);
+   var hdrButtons=new HorizontalSizer;hdrButtons.spacing=6;
+   var detect=new PushButton(hdrBox);detect.text="Auto-detect exposure groups";detect.onClick=function(){try{
+      var d=new OpenFileDialog;d.caption="Select one master per exposure group";d.multipleSelections=true;d.filters=hdrFilters;if(!d.execute())return;
+      var paths=MasterHDR.group(d.fileNames.map(MasterHDR.readHeader));paths.forEach(function(path,i){self.hdrSlots[i].text=path;});
+   }catch(e){new MessageBox(errorMessage(e),TITLE,StdIcon.Error,StdButton.Ok).execute();}};hdrButtons.add(detect);hdrButtons.addStretch();
+   var prepare=new PushButton(hdrBox);prepare.text="Prepare HDRComposition";prepare.onClick=function(){var paths=self.hdrSlots.map(function(edit){return edit.text.trim();});Settings.write("CCDASTRO/MasterWorkflow/hdrMasters",DataType_String,JSON.stringify(paths));self.saveSettings();selectedTool={hdrPaths:paths};self.ok();};hdrButtons.add(prepare);hdrBox.sizer.add(hdrButtons);this.sizer.add(hdrBox);
    this.details=label("WBPP/FBPP cover multiple stages. Use individual tools for a manual route; do not automatically repeat stages already completed by a batch pipeline.");this.details.wordWrapping=true;this.sizer.add(this.details);
    var reopenNote=label("Opening a tool closes this launcher. Reopen Master Workflow for the next stage; your folder entries and choices are remembered.");reopenNote.wordWrapping=true;this.sizer.add(reopenNote);
    this.currentPlan=function(){var p=MasterTools.profiles[self.profile.currentItem],f={},s={};p.channels.forEach(function(c){f[c]=self.folders[c].text;});stages.forEach(function(k){var c=self.choices[k];s[k]=c.items[c.combo.currentItem].id;});return MasterTools.plan(p,self.root.edit.text,self.output.edit.text,f,s);};
@@ -101,7 +119,9 @@ function main() {
    var dialog=new MasterDialog;
    if(!dialog.execute()||!selectedTool)return;
    try{
-      if(selectedTool.script){
+      if(selectedTool.hdrPaths){
+         MasterHDR.prepare(selectedTool.hdrPaths,function(warnings){return new MessageBox(warnings.join("\n\n")+"\n\nI confirm these are linear masters registered to a common reference. Prepare the process for review?",TITLE,StdIcon.Warning,StdButton.Yes,StdButton.No).execute()===StdButton.Yes;},function(p){return p.launchInterface();});
+      }else if(selectedTool.script){
          var path=installedScript(selectedTool);if(/["\r\n]/.test(path))throw new Error("Invalid script path.");
          var shell=File.systemTempDirectory+"/CCDASTRO_MasterLaunch_"+Date.now()+".scp";
          var requireSignature=scriptHasSignature(path);
