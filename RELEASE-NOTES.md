@@ -1,3 +1,10 @@
+# v0.3.2 - GPUStacker batch-processing shortcut
+
+Adds separately installed GPUStacker to Batch preprocessing. Open tool uses the
+existing script-dispatch and signature handling; users configure and execute
+processing in GPUStacker. No pipeline runs or image processing occur automatically.
+Existing session plans and WBPP/FBPP choices remain supported.
+
 # v0.3.1 - PixInsight 1.9.6 package compatibility
 
 Extends Update Manager eligibility from PI 1.9.5 only to PI 1.9.5–1.9.6.

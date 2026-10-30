@@ -7,7 +7,7 @@
 #include "MasterTools.js"
 #include "HDRPrepare.js"
 
-var TITLE="CCDASTRO Master Workflow 0.3.0";
+var TITLE="CCDASTRO Master Workflow 0.3.2";
 var selectedTool=null;
 function installedScript(tool) {
    var root=CoreApplication.srcDirPath+"/scripts/";

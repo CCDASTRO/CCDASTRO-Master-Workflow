@@ -34,3 +34,15 @@ was executed. The new manifest extends eligibility to PI 1.9.5–1.9.6 and still
 is signed. PixInsight verified both final signatures as valid for CCDASTRO
 (validation/v0.3.1-final-signatures.json). Package checksum and all four
 packaged source/signature files match.
+
+## v0.3.2 GPUStacker shortcut
+
+Catalog and saved-plan tests cover GPUStacker selection for all five acquisition
+profiles and installed/missing script resolution. Existing catalog/session and HDR
+regressions pass. GPUStacker.js exists at the installed standard script path.
+Native PixInsight UI validation passed: the v0.3.2 dialog contains GPUStacker,
+selects its catalog ID and resolves its installed script path. See
+validation/v0.3.2-gpustacker-ui.json. Actual dispatch and GPUStacker processing
+remain untested. No GPUStacker execution or image processing ran.
+The main script and final manifest have been signed. Native signature verification
+is recorded in validation/v0.3.2-final-signatures.json.

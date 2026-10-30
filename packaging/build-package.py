@@ -4,7 +4,7 @@ from datetime import datetime, timezone
 import hashlib, zipfile
 
 root=Path(__file__).resolve().parent.parent
-version='0.3.1'
+version='0.3.2'
 names=['CCDASTROMasterWorkflow.js','MasterTools.js','HDRPrepare.js','CCDASTROMasterWorkflow.xsgn']
 for name in names:
     p=root/'pixinsight'/name

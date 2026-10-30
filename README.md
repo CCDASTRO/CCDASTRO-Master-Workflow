@@ -1,6 +1,17 @@
 # CCDASTRO Master Workflow
 
-Version 0.3.1 - PixInsight 1.9.6 packaging update.
+Version 0.3.2 - GPUStacker batch-processing shortcut.
+
+## New in v0.3.2
+
+Select **Batch preprocessing > GPUStacker** and click **Open tool**. Uses the
+separately installed `src/scripts/GPUStacker.js`; missing installations are labeled
+not installed. Configure its AstroPipeline executable, frames and output in
+GPUStacker, then start processing there. Session folders remain planning entries.
+No GPUStacker code or executable is bundled. See the
+[GPUStacker project](https://github.com/chickadeebird/GPUStacker) for installation.
+The main script and update manifest are signed for CCDASTRO. Native dropdown
+validation passed; GPUStacker processing itself remains untested.
 
 ## Installation - start here
 
@@ -56,7 +67,7 @@ Folder rows are optional planning entries: unused filters can remain blank. Each
 
 | Stage | Existing choices |
 |---|---|
-| Batch preprocessing | WBPP, FBPP |
+| Batch preprocessing | WBPP, FBPP, GPUStacker (separately installed) |
 | Calibration | ImageCalibration |
 | Preparation / extraction | CosmeticCorrection, Debayer, ChannelExtraction, BatchChannelExtraction |
 | Registration | StarAlignment, FFTRegistration |

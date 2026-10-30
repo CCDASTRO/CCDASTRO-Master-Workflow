@@ -10,6 +10,7 @@ var MasterTools = (function () {
    var tools = [
       {id:"wbpp",name:"WeightedBatchPreprocessing (WBPP)",stage:"Batch preprocessing",script:"BatchPreprocessing/WBPP.js",note:"Existing pipeline for calibration, registration and integration. Configure lights, calibration frames, grouping, CFA and output in WBPP."},
       {id:"fbpp",name:"FastBatchPreprocessing (FBPP)",stage:"Batch preprocessing",script:"BatchPreprocessing/FBPP.js",note:"Alternative existing batch pipeline. Review its own options and tradeoffs before running."},
+      {id:"gpustacker",name:"GPUStacker",stage:"Batch preprocessing",script:"GPUStacker.js",note:"Open the separately installed GPUStacker front-end. Configure AstroPipeline, input frames, calibration and output in GPUStacker, then explicitly start processing there. Session folders are not handed off automatically."},
       {id:"calibration",name:"ImageCalibration",stage:"Calibration",process:"ImageCalibration",note:"Select light frames, matching calibration masters and output in the native tool."},
       {id:"cosmetic",name:"CosmeticCorrection",stage:"Preparation / extraction",process:"CosmeticCorrection",note:"Configure defect correction in the native interface, at the appropriate point in your calibration workflow."},
       {id:"debayer",name:"Debayer",stage:"Preparation / extraction",process:"Debayer",note:"OSC only: choose the actual camera CFA pattern. Do not debayer mono filter data."},

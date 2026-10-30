@@ -39,3 +39,17 @@ for(const available of ['NBExtractPI.js','Lighthouse/NBExtractPI/NBExtractPI.js'
  vm.createContext(ctx);vm.runInContext(resolverSource,ctx);
  assert.equal(ctx.installedScript(nb),'/pi/src/scripts/'+(available||'NBExtractPI.js'));
 }
+
+// GPUStacker participates in existing plan validation and script resolution.
+const gpu=catalog.tools.find(t=>t.id==='gpustacker');
+assert.equal(gpu.name,'GPUStacker');assert.equal(gpu.stage,'Batch preprocessing');
+assert.equal(gpu.script,'GPUStacker.js');
+for(const profile of catalog.profiles){
+ const p=catalog.plan(profile,'','',Object.fromEntries(profile.channels.map(c=>[c,''])),{'Batch preprocessing':'gpustacker'});
+ assert.equal(catalog.validate(JSON.parse(JSON.stringify(p))),profile);
+}
+for(const installed of [true,false]){
+ const ctx={CoreApplication:{srcDirPath:'/pi/src'},File:{exists:p=>installed&&p==='/pi/src/scripts/GPUStacker.js'}};
+ vm.createContext(ctx);vm.runInContext(resolverSource,ctx);assert.equal(ctx.installedScript(gpu),'/pi/src/scripts/GPUStacker.js');
+}
+console.log('GPUStacker catalog, saved-plan roundtrip and installed/missing path checks passed.');
