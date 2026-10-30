@@ -1,10 +1,12 @@
 # CCDASTRO Master Workflow
 
-Version 0.3.0 - signed development release.
+Version 0.3.1 - PixInsight 1.9.6 packaging update.
 
 ## Installation - start here
 
-**Current release: [v0.3.0](https://github.com/CCDASTRO/CCDASTRO-Master-Workflow/releases/tag/v0.3.0).** Adds three-master HDR preparation and automatic exposure-group detection; existing tools remain available. Script and updater-manifest signatures verified valid for CCDASTRO.
+**v0.3.1 packaging update:** extends the Update Manager range to PI 1.9.5–1.9.6. The unchanged signed launcher retains its 0.3.0 title. The script and new update manifest have been signed; native signature verification is recorded with the release.
+
+**Previous release: [v0.3.0](https://github.com/CCDASTRO/CCDASTRO-Master-Workflow/releases/tag/v0.3.0).** Adds three-master HDR preparation and automatic exposure-group detection; existing tools remain available. Script and updater-manifest signatures verified valid for CCDASTRO.
 
 ### Recommended: PixInsight Update Manager
 
@@ -14,6 +16,7 @@ Version 0.3.0 - signed development release.
 
 2. Run **Resources > Updates > Check for Updates**. Install CCDASTRO Master Workflow, then restart PixInsight when requested.
 3. Open **Script > CCDASTRO > Master Workflow**. If the menu is missing, use **Script > Feature Scripts** to scan `src/scripts/CCDASTROMasterWorkflow` under your PixInsight installation and regenerate the feature list.
+   After replacing/upgrading PixInsight, add this repository again if necessary: the new installation may not contain third-party scripts. Install the package, exit/restart, then scan the feature folder above.
 4. Get later versions through the same PixInsight updater. This is a separate repository from the post-processing Workflow Manager; both can coexist.
 
 ### Manual testing or installation

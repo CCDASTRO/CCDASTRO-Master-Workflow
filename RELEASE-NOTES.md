@@ -1,3 +1,11 @@
+# v0.3.1 - PixInsight 1.9.6 package compatibility
+
+Extends Update Manager eligibility from PI 1.9.5 only to PI 1.9.5–1.9.6.
+Reuses the byte-identical signed v0.3.0 launcher and local includes; the dialog
+title intentionally remains 0.3.0. No processing behavior changes. Reinstall
+through the project repository after a full PI replacement, then rescan
+src/scripts/CCDASTROMasterWorkflow if the menu is missing. Script and manifest signed.
+
 # v0.3.0 - Three-master HDR preparation (signed development release)
 
 Adds short/medium/long XISF/FITS selectors, header-based exposure grouping, input validation and a configured native HDRComposition review step. Existing stacking-tool catalog and dispatch remain unchanged. No HDR processing runs automatically. Existing input windows are preserved; newly opened windows are cleaned up on failure/cancel. Supports auto exposure evaluation, threshold 0.90, smoothness 7, growth 5, zero large-scale replacement, black-pixel rejection, 64-bit result and masks. Linear/registration assessments are heuristic and require user confirmation.

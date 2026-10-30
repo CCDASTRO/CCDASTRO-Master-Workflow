@@ -4,7 +4,7 @@ from datetime import datetime, timezone
 import hashlib, zipfile
 
 root=Path(__file__).resolve().parent.parent
-version='0.3.0'
+version='0.3.1'
 names=['CCDASTROMasterWorkflow.js','MasterTools.js','HDRPrepare.js','CCDASTROMasterWorkflow.xsgn']
 for name in names:
     p=root/'pixinsight'/name
@@ -25,7 +25,7 @@ date=datetime.now(timezone.utc).strftime('%Y%m%d%H%M%S')
 xml=f'''<?xml version="1.0" encoding="UTF-8"?>
 <xri version="1.0">
   <description><p>CCDASTRO Master Workflow - existing tools for session masters.</p></description>
-  <platform os="all" arch="noarch" version="1.9.5:1.9.5">
+  <platform os="all" arch="noarch" version="1.9.5:1.9.6">
     <package fileName="{package.name}" sha1="{sha1}" type="script" releaseDate="{date}">
       <title>CCDASTRO Master Workflow {version}</title>
       <description><p>A launch-only session planner for existing calibration, registration, integration and channel-combination tools. Includes mono LRGB/Ha/OIII/SII, OSC, OSC with filter sessions and OSC with mono narrowband data. Folder entries are a checklist, not automatic tool inputs. No processing runs automatically.</p></description>

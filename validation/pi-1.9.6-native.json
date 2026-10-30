@@ -1,0 +1,71 @@
+{
+  "scriptSignature": {
+    "valid": true,
+    "developerId": "CCDASTRO"
+  },
+  "tools": [
+    {
+      "id": "wbpp",
+      "path": "C:/Program Files/PixInsight/src/scripts/BatchPreprocessing/WBPP.js",
+      "exists": true
+    },
+    {
+      "id": "fbpp",
+      "path": "C:/Program Files/PixInsight/src/scripts/BatchPreprocessing/FBPP.js",
+      "exists": true
+    },
+    {
+      "id": "batch_extract",
+      "path": "C:/Program Files/PixInsight/src/scripts/BatchChannelExtraction/BatchChannelExtraction.js",
+      "exists": true
+    },
+    {
+      "id": "solve",
+      "path": "C:/Program Files/PixInsight/src/scripts/ImageSolver/ImageSolver.js",
+      "exists": true
+    },
+    {
+      "id": "nbextract",
+      "path": "C:/Program Files/PixInsight/src/scripts/NBExtractPI.js",
+      "exists": true
+    },
+    {
+      "id": "fft",
+      "path": "C:/Program Files/PixInsight/src/scripts/FFTRegistration/FFTRegistration.js",
+      "exists": true
+    },
+    {
+      "id": "nbrgb",
+      "path": "C:/Program Files/PixInsight/src/scripts/NBRGBCombination/NBRGBCombination.js",
+      "exists": true
+    }
+  ],
+  "dialogs": [
+    {
+      "profile": "mono",
+      "width": 790,
+      "height": 903
+    },
+    {
+      "profile": "osc",
+      "width": 790,
+      "height": 747
+    },
+    {
+      "profile": "osc_dual",
+      "width": 790,
+      "height": 786
+    },
+    {
+      "profile": "osc_filters",
+      "width": 790,
+      "height": 812
+    },
+    {
+      "profile": "osc_mono",
+      "width": 790,
+      "height": 838
+    }
+  ],
+  "ok": true
+}

@@ -24,3 +24,13 @@ Existing catalog, session-plan compatibility and launch-only checks passed. PixI
 ## v0.3.0 (signed development release)
 
 Existing catalog tests and focused HDR configuration/grouping/cleanup tests pass. Native PixInsight 1.9.5 reads exposure headers from synthetic FITS and XISF masters (1/10/100 seconds), sorts them correctly, opens the configured HDRComposition interface, and leaves no synthetic image windows after test cleanup. Cancellation cleanup passed. Native UI has three selectors and fits at 790 pixels wide (827 pixels high for the saved OSC+mono profile). No HDRComposition execution or real-image outcome tested. PixInsight verified the script and manifest signatures; the package checksum and all packaged sources/signature match.
+
+## PI 1.9.6 / v0.3.1 packaging check
+
+PixInsight verified the unchanged script signature as valid for CCDASTRO. All five
+profile dialogs constructed and every catalog script shortcut resolved to an
+installed file. Node catalog/session-plan and HDR tests pass. No image processing
+was executed. The new manifest extends eligibility to PI 1.9.5–1.9.6 and still
+is signed. PixInsight verified both final signatures as valid for CCDASTRO
+(validation/v0.3.1-final-signatures.json). Package checksum and all four
+packaged source/signature files match.
