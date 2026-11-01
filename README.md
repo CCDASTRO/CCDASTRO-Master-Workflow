@@ -2,30 +2,9 @@
 
 Version 0.4.0 - PixInsight 1.9.6 tool choices.
 
-## New in v0.4.0 — PixInsight 1.9.6 choices
-
-Adds ImageAnalysis, BlindSolver, AstrometricRegistration, FeatureRegistration (lunar/daylight), native SPFC/MGC mosaic-preparation interfaces, and WBPPLogAnalysis. New groups cover subframe analysis, mosaic preparation and diagnostics. These choices require PI 1.9.6; older installations show a clear requirement rather than attempting to launch them. Existing choices and version-1 session plans remain supported.
-
-Updated WBPP/FBPP, ImageSolver, FFTRegistration and ImageIntegration notes explain their new native options. ImageIntegration's biweight combination/standard-property weights and WBPP/FBPP's updated measurements are configured in their own tools; the launcher does not set or run them. No new processing algorithms, automatic processing, vendor assets or vendor-code bundles are added.
-
-The v0.4.0 script and update manifest are signed, and PixInsight verified both signatures as valid for CCDASTRO.
-
-## New in v0.3.2
-
-Select **Batch preprocessing > GPUStacker** and click **Open tool**. Uses the
-separately installed `src/scripts/GPUStacker.js`; missing installations are labeled
-not installed. Configure its AstroPipeline executable, frames and output in
-GPUStacker, then start processing there. Session folders remain planning entries.
-No GPUStacker code or executable is bundled. See the
-[GPUStacker project](https://github.com/chickadeebird/GPUStacker) for installation.
-The main script and update manifest are signed for CCDASTRO. Native dropdown
-validation passed; GPUStacker processing itself remains untested.
+[Changelog](#changelog)
 
 ## Installation - start here
-
-**v0.3.1 packaging update:** extends the Update Manager range to PI 1.9.5–1.9.6. The unchanged signed launcher retains its 0.3.0 title. The script and new update manifest have been signed; native signature verification is recorded with the release.
-
-**Previous release: [v0.3.0](https://github.com/CCDASTRO/CCDASTRO-Master-Workflow/releases/tag/v0.3.0).** Adds three-master HDR preparation and automatic exposure-group detection; existing tools remain available. Script and updater-manifest signatures verified valid for CCDASTRO.
 
 ### Recommended: PixInsight Update Manager
 
@@ -102,7 +81,7 @@ WBPP/FBPP are complete batch routes, while the individual tools provide a manual
 
 An OSC filter's RGB planes are not necessarily pure Ha, OIII and SII. Select an extraction method appropriate to the camera and filter, using existing tools or saved processes. This prototype does not automate those expressions or infer filter transmission. NBRGBCombination has its own supported input mappings; it is not a universal OSC narrowband extractor.
 
-## Extract Ha and OIII from OSC L-Ultimate data (new in v0.2.1)
+## Extract Ha and OIII from OSC L-Ultimate data
 
 1. Calibrate, debayer, register and integrate the dual-band OSC sessions with WBPP/FBPP or the individual existing tools. Keep the resulting **RGB master linear**; do not stretch before extraction.
 2. In Master Workflow choose the **OSC + Ha/OIII filter sessions** profile. Open **Plate solving > ImageSolver** and solve that RGB master. NBExtractPI also requires the Gaia process configured with local **Gaia DR3/SP XPSD** spectrum database files (the SPCC spectrum database).
@@ -129,7 +108,7 @@ Run `node tests/catalog.test.cjs` for catalog and JSON-plan validation checks. N
 
 Choose **Integration / masters > HDRComposition**, then **Open tool**. In PixInsight, select registered linear images of the same field with different exposure lengths and configure the native HDRComposition controls. Processing runs only when you explicitly execute that tool. This combines exposure sets; it is distinct from HDRMultiscaleTransform. Native tool launch and real-image HDR processing have not been tested for this release.
 
-## Prepare HDRComposition (v0.3.0)
+## Prepare HDRComposition
 
 1. In the HDR Composition section browse to **Short**, **Medium** and **Long** registered linear masters (XISF or FITS). Or click **Auto-detect exposure groups**, select one master per exposure length, and let header metadata populate the slots in ascending order.
 2. Auto-detection reads EXPTIME/EXPOSURE and XISF Instrument:ExposureTime. Missing/conflicting exposure metadata, duplicate files, more/fewer than three exposure groups, and multiple masters in a group are rejected without changing the slots. It does not integrate frames or guess from filenames. Manual selection remains available when exposure headers are absent.
@@ -137,3 +116,58 @@ Choose **Integration / masters > HDRComposition**, then **Open tool**. In PixIns
 4. Review the pre-filled native HDRComposition interface, then execute it yourself. Automatic exposure evaluation, threshold 0.90, smoothness 7, growth 5, replace large scales 0, reject black pixels, 64-bit result and output masks are configured. Existing windows are not closed. Continue with the resulting linear HDR master in Workflow Manager.
 
 PixInsight 1.9.5 supports importing the configured instance through launchInterface(); native verification succeeded. No fallback icon is needed on this supported installation. Preparation never executes HDRComposition. New input windows close on cancellation/errors; pre-existing windows are preserved. Synthetic FITS/XISF header, preparation, cancellation and cleanup tests passed; real-image HDR output quality was not tested. Run `node tests/hdr.test.cjs` for focused regressions.
+
+## Changelog
+
+Release history, newest first. Historical validation statements describe the checks performed for that release.
+
+### v0.4.0 - PixInsight 1.9.6 tool choices
+
+Adds ImageAnalysis, BlindSolver, AstrometricRegistration, FeatureRegistration (lunar/daylight), native SPFC/MGC mosaic-preparation interfaces, and WBPPLogAnalysis. New groups cover subframe analysis, mosaic preparation and diagnostics. These choices require PI 1.9.6; older installations show a clear requirement rather than attempting to launch them. Existing choices and version-1 session plans remain supported.
+
+Updated WBPP/FBPP, ImageSolver, FFTRegistration and ImageIntegration notes explain their new native options. ImageIntegration's biweight combination/standard-property weights and WBPP/FBPP's updated measurements are configured in their own tools; the launcher does not set or run them. No new processing algorithms, automatic processing, vendor assets or vendor-code bundles are added.
+
+The v0.4.0 script and update manifest are signed, and PixInsight verified both signatures as valid for CCDASTRO.
+
+### v0.3.2 - GPUStacker batch-processing shortcut
+
+Select **Batch preprocessing > GPUStacker** and click **Open tool**. Uses the
+separately installed `src/scripts/GPUStacker.js`; missing installations are labeled
+not installed. Configure its AstroPipeline executable, frames and output in
+GPUStacker, then start processing there. Session folders remain planning entries.
+No GPUStacker code or executable is bundled. See the
+[GPUStacker project](https://github.com/chickadeebird/GPUStacker) for installation.
+The main script and update manifest are signed for CCDASTRO. Native dropdown
+validation passed; GPUStacker processing itself remains untested.
+
+Existing session plans and WBPP/FBPP choices remain supported.
+
+### v0.3.1 - PixInsight 1.9.6 package compatibility
+
+Extends Update Manager eligibility from PI 1.9.5 only to PI 1.9.5–1.9.6.
+Reuses the byte-identical signed v0.3.0 launcher and local includes; the dialog
+title intentionally remains 0.3.0. No processing behavior changes. Reinstall
+through the project repository after a full PI replacement, then rescan
+src/scripts/CCDASTROMasterWorkflow if the menu is missing. Script and manifest signed.
+
+### v0.3.0 - Three-master HDR preparation (signed development release)
+
+Adds short/medium/long XISF/FITS selectors, header-based exposure grouping, input validation and a configured native HDRComposition review step. Existing stacking-tool catalog and dispatch remain unchanged. No HDR processing runs automatically. Existing input windows are preserved; newly opened windows are cleaned up on failure/cancel. Supports auto exposure evaluation, threshold 0.90, smoothness 7, growth 5, zero large-scale replacement, black-pixel rejection, 64-bit result and masks. Linear/registration assessments are heuristic and require user confirmation.
+
+### v0.2.1 - HDR Composition shortcut
+
+Adds HDRComposition to Integration / masters. Opens the native PixInsight interface without executing processing. Use registered linear images of the same field at different exposure lengths. Existing session plans remain compatible. PixInsight verified the script and updater-manifest signatures; package checksum and packaged source bytes match. Native PixInsight interface dispatch has not yet been verified.
+
+### v0.2.0 - OSC dual-band narrowband extraction shortcut
+
+Adds a dedicated OSC narrowband extraction row for separately installed NBExtractPI, plus ImageSolver for its plate-solving prerequisite. Detects the standard NBExtractPI location and falls back to the installed Lighthouse copy. Existing v0.1.1 session plans remain usable.
+
+The guide covers a linear, debayered, plate-solved L-Ultimate RGB integration, Gaia DR3/SP database setup, Ha/OIII with 3 nm passbands, explicit mixing calibration/extraction and saving the resulting mono masters. SII requires separate data. No new extraction algorithm, vendor source or automatic processing is included.
+
+### v0.1.1 - First development release
+
+One launcher for existing tools used to create masters from session datasets. Five acquisition profiles cover mono LRGB/Ha/OIII/SII, OSC, OSC plus dual/multiple narrowband filter sessions, and OSC plus mono narrowband data. Stage dropdowns include WBPP/FBPP, native calibration/preparation, registration, integration and channel-combination interfaces. Optional folder checklists and JSON session plans are remembered separately from processing.
+
+No new processing algorithms and no automatic processing. Tool inputs and settings remain configured in the selected tool. Signed scripts are verified before dispatch; the bundled legacy NBRGBCombination follows normal PixInsight handling. Scripts missing from the standard installation are marked unavailable.
+
+Native V8 layout checks passed for all five profiles; signed installed-script checks and plan/catalog regressions passed. Actual end-to-end calibration/integration and tool dispatch have not been validated on user datasets. This is a development release.
