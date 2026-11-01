@@ -1,0 +1,140 @@
+{
+  "build": 1713,
+  "tools": [
+    {
+      "id": "analysis",
+      "path": "ImageAnalysis",
+      "unavailable": "",
+      "signature": null
+    },
+    {
+      "id": "blind",
+      "path": "C:/Program Files/PixInsight/src/scripts/BlindSolver/BlindSolver.js",
+      "unavailable": "",
+      "signature": true
+    },
+    {
+      "id": "astroreg",
+      "path": "C:/Program Files/PixInsight/src/scripts/AstrometricRegistration/AstrometricRegistration.js",
+      "unavailable": "",
+      "signature": true
+    },
+    {
+      "id": "featurereg",
+      "path": "C:/Program Files/PixInsight/src/scripts/FeatureRegistration/FeatureRegistration.js",
+      "unavailable": "",
+      "signature": true
+    },
+    {
+      "id": "spfc",
+      "path": "SpectrophotometricFluxCalibration",
+      "unavailable": "",
+      "signature": null
+    },
+    {
+      "id": "mgc",
+      "path": "MultiscaleGradientCorrection",
+      "unavailable": "",
+      "signature": null
+    },
+    {
+      "id": "wbpplog",
+      "path": "C:/Program Files/PixInsight/src/scripts/WBPPLogAnalysis/WBPPLogAnalysis.js",
+      "unavailable": "",
+      "signature": true
+    }
+  ],
+  "profiles": [
+    {
+      "id": "mono",
+      "width": 790,
+      "height": 984,
+      "stages": [
+        "Batch preprocessing",
+        "Calibration",
+        "Preparation / extraction",
+        "Subframe analysis",
+        "Registration",
+        "Integration / masters",
+        "Plate solving",
+        "Mosaic preparation",
+        "OSC narrowband extraction",
+        "Channel combination",
+        "Diagnostics / logs"
+      ]
+    },
+    {
+      "id": "osc",
+      "width": 790,
+      "height": 828,
+      "stages": [
+        "Batch preprocessing",
+        "Calibration",
+        "Preparation / extraction",
+        "Subframe analysis",
+        "Registration",
+        "Integration / masters",
+        "Plate solving",
+        "Mosaic preparation",
+        "OSC narrowband extraction",
+        "Channel combination",
+        "Diagnostics / logs"
+      ]
+    },
+    {
+      "id": "osc_dual",
+      "width": 790,
+      "height": 867,
+      "stages": [
+        "Batch preprocessing",
+        "Calibration",
+        "Preparation / extraction",
+        "Subframe analysis",
+        "Registration",
+        "Integration / masters",
+        "Plate solving",
+        "Mosaic preparation",
+        "OSC narrowband extraction",
+        "Channel combination",
+        "Diagnostics / logs"
+      ]
+    },
+    {
+      "id": "osc_filters",
+      "width": 790,
+      "height": 893,
+      "stages": [
+        "Batch preprocessing",
+        "Calibration",
+        "Preparation / extraction",
+        "Subframe analysis",
+        "Registration",
+        "Integration / masters",
+        "Plate solving",
+        "Mosaic preparation",
+        "OSC narrowband extraction",
+        "Channel combination",
+        "Diagnostics / logs"
+      ]
+    },
+    {
+      "id": "osc_mono",
+      "width": 790,
+      "height": 919,
+      "stages": [
+        "Batch preprocessing",
+        "Calibration",
+        "Preparation / extraction",
+        "Subframe analysis",
+        "Registration",
+        "Integration / masters",
+        "Plate solving",
+        "Mosaic preparation",
+        "OSC narrowband extraction",
+        "Channel combination",
+        "Diagnostics / logs"
+      ]
+    }
+  ],
+  "ok": true
+}

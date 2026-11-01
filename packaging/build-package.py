@@ -4,7 +4,7 @@ from datetime import datetime, timezone
 import hashlib, zipfile
 
 root=Path(__file__).resolve().parent.parent
-version='0.3.2'
+version='0.4.0'
 names=['CCDASTROMasterWorkflow.js','MasterTools.js','HDRPrepare.js','CCDASTROMasterWorkflow.xsgn']
 for name in names:
     p=root/'pixinsight'/name
@@ -13,6 +13,9 @@ for name in names:
         b=p.read_bytes()
         if b.startswith(b'\xef\xbb\xbf') or b'\n' in b.replace(b'\r\n',b''):
             raise SystemExit('Signed source must use UTF-8 without BOM and CRLF: '+name)
+signature=root/'pixinsight'/'CCDASTROMasterWorkflow.xsgn'
+if any((root/'pixinsight'/n).stat().st_mtime_ns > signature.stat().st_mtime_ns for n in names if n.endswith('.js')):
+    raise SystemExit('Source changed after signing. Sign and verify the final script before packaging.')
 out=root/'updates';out.mkdir(exist_ok=True)
 manifest=out/'updates.xri'
 if manifest.exists() and b'<Signature' in manifest.read_bytes() and f'CCDASTROMasterWorkflow-{version}.zip'.encode() in manifest.read_bytes():
@@ -28,7 +31,7 @@ xml=f'''<?xml version="1.0" encoding="UTF-8"?>
   <platform os="all" arch="noarch" version="1.9.5:1.9.6">
     <package fileName="{package.name}" sha1="{sha1}" type="script" releaseDate="{date}">
       <title>CCDASTRO Master Workflow {version}</title>
-      <description><p>A launch-only session planner for existing calibration, registration, integration and channel-combination tools. Includes mono LRGB/Ha/OIII/SII, OSC, OSC with filter sessions and OSC with mono narrowband data. Folder entries are a checklist, not automatic tool inputs. No processing runs automatically.</p></description>
+      <description><p>A launch-only session planner with PI 1.9.6 ImageAnalysis, BlindSolver, astrometric/lunar registration, mosaic calibration and WBPP log analysis choices. Includes mono LRGB/Ha/OIII/SII, OSC, OSC with filter sessions and OSC with mono narrowband data. Folder entries are a checklist, not automatic tool inputs. No processing runs automatically.</p></description>
     </package>
   </platform>
 </xri>

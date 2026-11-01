@@ -4,12 +4,12 @@
       <p>CCDASTRO Master Workflow - existing tools for session masters.</p>
    </description>
    <platform os="all" arch="noarch" version="1.9.5:1.9.6">
-      <package fileName="CCDASTROMasterWorkflow-0.3.2.zip" sha1="968f1daeb706ab187c6e960ca6af7434bf60aece" type="script" releaseDate="20261030231758">
-         <title>CCDASTRO Master Workflow 0.3.2</title>
+      <package fileName="CCDASTROMasterWorkflow-0.4.0.zip" sha1="b29795dcab3e36626ac4216504e63c285e1a211d" type="script" releaseDate="20261101122141">
+         <title>CCDASTRO Master Workflow 0.4.0</title>
          <description>
-            <p>A launch-only session planner for existing calibration, registration, integration and channel-combination tools. Includes mono LRGB/Ha/OIII/SII, OSC, OSC with filter sessions and OSC with mono narrowband data. Folder entries are a checklist, not automatic tool inputs. No processing runs automatically.</p>
+            <p>Launch-only session planning with PI 1.9.6 ImageAnalysis, BlindSolver, astrometric/lunar registration, mosaic calibration and WBPP log analysis choices. Five acquisition profiles and existing plans remain supported. Folder entries are a checklist, not automatic tool inputs. No processing runs automatically.</p>
          </description>
       </package>
    </platform>
 </xri>
-<Signature developerId="CCDASTRO" timestamp="2026-10-30T23:18:38.258Z" encoding="Base64">o4gZ51GJWCvceNGUcS4r0UGhNvKilaNzA4Qe9YabPKkVMz0O3fiJoOcklA/P77VDnsCjr2/PWS2+m7lGVvp6Dg==</Signature>
+<Signature developerId="CCDASTRO" timestamp="2026-11-01T12:21:51.674Z" encoding="Base64">1nsnw5rx7DGmtbgxiLQjvtxDMeq8ry4NH18CQMRHG07Ss4lvnVpHcrO0ZCMl2vof9m7KN5wrBzZSbaIZUB7/CQ==</Signature>

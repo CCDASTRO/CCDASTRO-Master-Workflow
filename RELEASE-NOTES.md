@@ -1,3 +1,11 @@
+# v0.4.0 - PixInsight 1.9.6 tool choices
+
+Adds ImageAnalysis, BlindSolver, AstrometricRegistration, FeatureRegistration (lunar/daylight), native SPFC/MGC mosaic-preparation interfaces, and WBPPLogAnalysis. New groups cover subframe analysis, mosaic preparation and diagnostics. These choices require PI 1.9.6; older installations show a clear requirement rather than attempting to launch them. Existing choices and version-1 session plans remain supported.
+
+Updated WBPP/FBPP, ImageSolver, FFTRegistration and ImageIntegration notes explain their new native options. ImageIntegration's biweight combination/standard-property weights and WBPP/FBPP's updated measurements are configured in their own tools; the launcher does not set or run them. No new processing algorithms, automatic processing, vendor assets or vendor-code bundles are added.
+
+The v0.4.0 script and update manifest are signed, and PixInsight verified both signatures as valid for CCDASTRO.
+
 # v0.3.2 - GPUStacker batch-processing shortcut
 
 Adds separately installed GPUStacker to Batch preprocessing. Open tool uses the

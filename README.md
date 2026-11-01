@@ -1,6 +1,14 @@
 # CCDASTRO Master Workflow
 
-Version 0.3.2 - GPUStacker batch-processing shortcut.
+Version 0.4.0 - PixInsight 1.9.6 tool choices.
+
+## New in v0.4.0 — PixInsight 1.9.6 choices
+
+Adds ImageAnalysis, BlindSolver, AstrometricRegistration, FeatureRegistration (lunar/daylight), native SPFC/MGC mosaic-preparation interfaces, and WBPPLogAnalysis. New groups cover subframe analysis, mosaic preparation and diagnostics. These choices require PI 1.9.6; older installations show a clear requirement rather than attempting to launch them. Existing choices and version-1 session plans remain supported.
+
+Updated WBPP/FBPP, ImageSolver, FFTRegistration and ImageIntegration notes explain their new native options. ImageIntegration's biweight combination/standard-property weights and WBPP/FBPP's updated measurements are configured in their own tools; the launcher does not set or run them. No new processing algorithms, automatic processing, vendor assets or vendor-code bundles are added.
+
+The v0.4.0 script and update manifest are signed, and PixInsight verified both signatures as valid for CCDASTRO.
 
 ## New in v0.3.2
 
@@ -37,7 +45,7 @@ validation passed; GPUStacker processing itself remains untested.
 3. For a persistent menu entry, use **Script > Feature Scripts**, add the directory containing the main script, and regenerate the feature list. Look for **CCDASTRO > Master Workflow**.
 4. For a manual upgrade, close the launcher and replace all four files with the matching new version. Preserve any JSON session plans stored elsewhere. Do not mix a new include with an old signature.
 
-Tested UI scope: PixInsight 1.9.5 with the V8 runtime. No third-party tools are bundled. WBPP/FBPP and other script choices must be separately installed in their normal PixInsight locations. A source checkout is unsigned until CodeSign has been completed.
+Current native UI scope: PixInsight 1.9.6 build 1713 with the V8 runtime; all five profile dialogs construct and new installed-script signatures verify. Older releases were checked on PI 1.9.5. No third-party tools are bundled. WBPP/FBPP and other script choices must be separately installed in their normal PixInsight locations. A source checkout is unsigned until CodeSign has been completed.
 
 ## Quick use
 
@@ -63,6 +71,15 @@ A separate PixInsight launcher that puts existing tools for creating masters in 
 
 Folder rows are optional planning entries: unused filters can remain blank. Each selected folder can contain its normal session structure; the launcher does not recurse through it or classify lights, flats, darks or bias. Use the selected tool's file-loading and grouping controls. Calibration frames must match the dataset as required by that tool.
 
+## PixInsight 1.9.6 guidance
+
+- Use **ImageAnalysis** for new subframe measurement/approval/weighting work; WBPP/FBPP 3.2 already use it internally, so do not repeat it without a purpose.
+- **BlindSolver** handles active images or file batches with a configured local Gaia astrometric index. **ImageSolver** provides Automatic/Always/Disabled modes and full distortion-corrected solutions; configure these in its own dialog.
+- **AstrometricRegistration** handles deep-sky registration/per-filter mosaics from astrometric solutions. **FeatureRegistration** is for lunar/daylight features, not deep-sky star fields. FFTRegistration 2.1 is for image matching, not mosaic composition.
+- **Mosaic preparation** opens native SPFC or MGC. Their target-file batch, automatic scale-factor, edge-correction and MARS fallback controls belong to those interfaces; session-plan paths are not imported. AstrometricRegistration also offers its own correction options. Do not duplicate calibration/correction already completed there.
+- **WBPPLogAnalysis** inspects pipeline logs and generates reports. It does not rerun or repair preprocessing automatically.
+- **ImageIntegration** exposes biweight combination, standard image-property weights and weight-overshoot protection on PI 1.9.6. Review those choices explicitly; the launcher leaves native defaults unchanged.
+
 ## Tool groups
 
 | Stage | Existing choices |
@@ -70,13 +87,16 @@ Folder rows are optional planning entries: unused filters can remain blank. Each
 | Batch preprocessing | WBPP, FBPP, GPUStacker (separately installed) |
 | Calibration | ImageCalibration |
 | Preparation / extraction | CosmeticCorrection, Debayer, ChannelExtraction, BatchChannelExtraction |
-| Registration | StarAlignment, FFTRegistration |
-| Integration / masters | ImageIntegration, DrizzleIntegration |
-| Plate solving | ImageSolver |
+| Subframe analysis | ImageAnalysis (PI 1.9.6) |
+| Registration | StarAlignment, FFTRegistration, AstrometricRegistration, FeatureRegistration (lunar/daylight) |
+| Integration / masters | ImageIntegration, DrizzleIntegration, HDRComposition |
+| Plate solving | ImageSolver, BlindSolver (PI 1.9.6) |
+| Mosaic preparation | SpectrophotometricFluxCalibration, MultiscaleGradientCorrection (PI 1.9.6 batch interfaces) |
 | OSC narrowband extraction | NBExtractPI (separately installed) |
 | Channel combination | ChannelCombination, LRGBCombination, NBRGBCombination |
+| Diagnostics / logs | WBPPLogAnalysis (PI 1.9.6) |
 
-Scripts missing from the standard installation path are labeled not installed. Optional tools are not bundled. Scripts with an installed signature must verify before launching. Legacy scripts without a signature, such as the installed NBRGBCombination, open through normal PixInsight script handling; no arbitrary script path can be selected. Native process availability is checked when opening; errors leave images untouched.
+PI 1.9.6 choices are labeled unavailable on older builds. Scripts missing from the standard installation path are labeled not installed. Optional tools are not bundled. Scripts with an installed signature must verify before launching. Legacy scripts without a signature, such as the installed NBRGBCombination, open through normal PixInsight script handling; no arbitrary script path can be selected. Native process availability is checked when opening; errors leave images untouched.
 
 WBPP/FBPP are complete batch routes, while the individual tools provide a manual route. Do not repeat processing stages already performed by a batch pipeline. Choose a common registration reference for data intended for combination. Drizzle requires the appropriate upstream drizzle data.
 
@@ -100,6 +120,8 @@ The installed NBExtractPI documentation credits the extraction method to **Frank
 All processing is performed by the original installed tools. PixInsight and its native processes are developed by Pleiades Astrophoto. WBPP/FBPP credits in the installed distribution include Roberto Sartori, Adam Block, Tommaso Rubechi, Kai Wiechen and Pleiades Astrophoto. Other scripts retain their original authorship and licensing; refer to each installed script's About/source information. No third-party code or processing assets are redistributed here.
 
 ## Verification
+
+v0.4.0 native checks constructed all five profiles and verified the new installed script signatures without executing tools. The rendered dialog was inspected. Full pipeline processing remains untested.
 
 Run `node tests/catalog.test.cjs` for catalog and JSON-plan validation checks. Native PixInsight UI checks are recorded separately in VALIDATION.md. This prototype has not been qualified on real calibration/integration datasets and does not guarantee finished masters.
 

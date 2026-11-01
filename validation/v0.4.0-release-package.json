@@ -1,0 +1,23 @@
+{
+  "version": "0.4.0",
+  "packageSHA1": "b29795dcab3e36626ac4216504e63c285e1a211d",
+  "nativeSignatures": {
+    "script": {
+      "valid": true,
+      "developerId": "CCDASTRO"
+    },
+    "manifest": {
+      "valid": true,
+      "developerId": "CCDASTRO"
+    },
+    "ok": true
+  },
+  "sha256": {
+    "pixinsight/CCDASTROMasterWorkflow.js": "6a7d7b22d13ab74bf21380c158c2093b3fcc0830302c7736714814d4d5b384aa",
+    "pixinsight/MasterTools.js": "28fe4c1c05db34c1b51b48005323abe17e42a4fd261cb8635dd3dd94497988ae",
+    "pixinsight/HDRPrepare.js": "abe527758bce3ba7d79af01d69984d12eddbf51090d039a11d35195086b1b3ae",
+    "pixinsight/CCDASTROMasterWorkflow.xsgn": "2c83a41a4cbb874f4bf9d9a4ca537e88151d98085d3e51e6f7d4d5bf6e2ddaa8",
+    "updates/updates.xri": "1d749e930796f2044734dcdf3b91d1bd647a0c6a7a8a5f2bc8d24d9469b9709b",
+    "updates/CCDASTROMasterWorkflow-0.4.0.zip": "cece172135e215d9707ee980d72f95770493f41371cbd489fe745a575a9cee37"
+  }
+}

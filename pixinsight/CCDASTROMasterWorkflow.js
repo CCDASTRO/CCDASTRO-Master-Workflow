@@ -7,7 +7,7 @@
 #include "MasterTools.js"
 #include "HDRPrepare.js"
 
-var TITLE="CCDASTRO Master Workflow 0.3.2";
+var TITLE="CCDASTRO Master Workflow 0.4.0";
 var selectedTool=null;
 function installedScript(tool) {
    var root=CoreApplication.srcDirPath+"/scripts/";
@@ -20,6 +20,20 @@ function scriptHasSignature(path) {
    var signature=Security.getScriptSignature(path);
    if(!signature||!signature.valid)throw new Error("The installed script signature is invalid. Reinstall it through its official repository.");
    return true;
+}
+function toolUnavailableReason(tool) {
+   if(tool.minBuild && CoreApplication.versionBuild<tool.minBuild)return "requires PixInsight 1.9.6";
+   if(tool.script && !File.exists(installedScript(tool)))return "not installed";
+   if(tool.process && !nativeProcessAvailable(tool.process))return "process not installed";
+   return "";
+}
+function nativeProcessAvailable(id) {
+   switch(id){
+   case "ImageAnalysis":return typeof ImageAnalysis!=="undefined";
+   case "SpectrophotometricFluxCalibration":return typeof SpectrophotometricFluxCalibration!=="undefined";
+   case "MultiscaleGradientCorrection":return typeof MultiscaleGradientCorrection!=="undefined";
+   default:return true;
+   }
 }
 function errorMessage(e){return e && e.message ? e.message : String(e);}
 class MasterDialog extends Dialog {
@@ -51,15 +65,16 @@ class MasterDialog extends Dialog {
       self.folders[name]=e;self.folderRows.push({name:name,control:wrap});self.folderBox.sizer.add(wrap);
    });this.sizer.add(this.folderBox);
    var toolBox=new GroupBox(this);toolBox.title="Choose an existing method";toolBox.sizer=new VerticalSizer;toolBox.sizer.margin=8;toolBox.sizer.spacing=5;
-   var stages=["Batch preprocessing","Calibration","Preparation / extraction","Registration","Integration / masters","Plate solving","OSC narrowband extraction","Channel combination"];
+   var stages=MasterTools.stages;
    stages.forEach(function(stage){
       var wrap=new Control(toolBox);wrap.sizer=new HorizontalSizer;wrap.sizer.spacing=6;
       var l=new Label(wrap);l.text=stage;l.setFixedWidth(175);wrap.sizer.add(l);
       var combo=new ComboBox(wrap);var items=MasterTools.tools.filter(function(t){return t.stage===stage;});
-      items.forEach(function(t){combo.addItem(t.name+(t.script&&!File.exists(installedScript(t))?" (not installed)":""));});wrap.sizer.add(combo,100);self.choices[stage]={combo:combo,items:items};
+      items.forEach(function(t){var reason=toolUnavailableReason(t);combo.addItem(t.name+(reason?" ("+reason+")":""));});wrap.sizer.add(combo,100);self.choices[stage]={combo:combo,items:items};
       var open=new PushButton(wrap);open.text="Open tool";open.onClick=function(){
          var tool=items[combo.currentItem];
          try {
+            var unavailable=toolUnavailableReason(tool);if(unavailable)throw new Error(tool.name+": "+unavailable+". Install/update the original tool through its official distribution.");
             if(tool.script){var path=installedScript(tool);if(!File.exists(path))throw new Error("This script is not installed: "+path);scriptHasSignature(path);}
             selectedTool=tool;self.saveSettings();self.ok();
          }catch(e){new MessageBox(errorMessage(e),TITLE,StdIcon.Error,StdButton.Ok).execute();}
@@ -101,6 +116,9 @@ class MasterDialog extends Dialog {
 function openNative(id) {
    var process;
    switch(id){
+   case "ImageAnalysis":process=new ImageAnalysis;break;
+   case "SpectrophotometricFluxCalibration":process=new SpectrophotometricFluxCalibration;break;
+   case "MultiscaleGradientCorrection":process=new MultiscaleGradientCorrection;break;
    case "ImageCalibration":process=new ImageCalibration;break;
    case "CosmeticCorrection":process=new CosmeticCorrection;break;
    case "Debayer":process=new Debayer;break;

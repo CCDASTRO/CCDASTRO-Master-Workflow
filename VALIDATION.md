@@ -46,3 +46,7 @@ validation/v0.3.2-gpustacker-ui.json. Actual dispatch and GPUStacker processing
 remain untested. No GPUStacker execution or image processing ran.
 The main script and final manifest have been signed. Native signature verification
 is recorded in validation/v0.3.2-final-signatures.json.
+
+## v0.4.0 — PI 1.9.6 tool choices
+
+Catalog/session-plan regressions and focused HDR regressions pass. Tests cover every new choice across all five acquisition profiles, preserved original stage defaults, old plans without new groups, installed/missing scripts/processes, PI build requirements, and interface-only native dispatch. Native PI 1.9.6 build 1713 constructed all five profile dialogs and resolved all seven new tools; the four new script shortcuts have valid installed signatures. See validation/v0.4.0-native-ui.json and its rendered PNG. The dialog render was inspected: new stage rows fit and controls remain accessible. No tool processing or script dispatch was executed in this check; real datasets and full pipeline outcomes remain untested. PixInsight verified the final script and manifest signatures as valid for CCDASTRO (validation/v0.4.0-final-signatures.json). The ZIP checksum and all four packaged source/signature files match.
