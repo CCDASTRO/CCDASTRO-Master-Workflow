@@ -2,7 +2,7 @@
 param()
 $ErrorActionPreference='Stop'
 $taskRoot=Split-Path -Parent $PSScriptRoot
-$taskVersion='0.4.0'
+$taskVersion='0.4.1'
 $taskNames=@('CCDASTROMasterWorkflow.js','MasterTools.js','HDRPrepare.js','CCDASTROMasterWorkflow.xsgn')
 $taskSignature=Join-Path $taskRoot 'pixinsight/CCDASTROMasterWorkflow.xsgn'
 $taskUtf8=[Text.UTF8Encoding]::new($false)
@@ -17,10 +17,10 @@ foreach($taskName in $taskNames){
 }
 $taskSource=[IO.File]::ReadAllText((Join-Path $taskRoot 'pixinsight/CCDASTROMasterWorkflow.js'))
 if($taskSource -notmatch ('var TITLE="CCDASTRO Master Workflow '+[regex]::Escape($taskVersion)+'";')){throw 'Package version does not match the launcher title.'}
-$taskReport=Join-Path $taskRoot 'validation/v0.4.0-script-signature.json'
-if(-not(Test-Path -LiteralPath $taskReport)){throw 'Verify the signed script in PixInsight with validation/verify-v0.4.0-script.js before packaging.'}
+$taskReport=Join-Path $taskRoot 'validation/v0.4.1-script-signature.json'
+if(-not(Test-Path -LiteralPath $taskReport)){throw 'Verify the signed script in PixInsight with validation/verify-v0.4.1-script.js before packaging.'}
 $taskVerified=Get-Content -LiteralPath $taskReport -Raw | ConvertFrom-Json
-if($taskVerified.valid -ne $true -or $taskVerified.developerId -ne 'CCDASTRO' -or (Get-Item -LiteralPath $taskReport).LastWriteTimeUtc -lt (Get-Item -LiteralPath $taskSignature).LastWriteTimeUtc){throw 'Native script verification is invalid or stale. Run validation/verify-v0.4.0-script.js in PixInsight.'}
+if($taskVerified.valid -ne $true -or $taskVerified.developerId -ne 'CCDASTRO' -or (Get-Item -LiteralPath $taskReport).LastWriteTimeUtc -lt (Get-Item -LiteralPath $taskSignature).LastWriteTimeUtc){throw 'Native script verification is invalid or stale. Run validation/verify-v0.4.1-script.js in PixInsight.'}
 $taskUpdates=Join-Path $taskRoot 'updates'
 $taskManifest=Join-Path $taskUpdates 'updates.xri'
 $taskPackageName="CCDASTROMasterWorkflow-$taskVersion.zip"
@@ -50,7 +50,7 @@ try{
   <platform os="all" arch="noarch" version="1.9.5:1.9.6">
     <package fileName="$taskPackageName" sha1="$taskHash" type="script" releaseDate="$taskDate">
       <title>CCDASTRO Master Workflow $taskVersion</title>
-      <description><p>Launch-only session planning with PI 1.9.6 ImageAnalysis, BlindSolver, astrometric/lunar registration, mosaic calibration and WBPP log analysis choices. Five acquisition profiles and existing plans remain supported. Folder entries are a checklist, not automatic tool inputs. No processing runs automatically.</p></description>
+      <description><p>Launch-only session planning with build 1718 registration-project/mixed-resolution mosaic guidance and a review-only cardinal quintic B-spline Resample choice. Five acquisition profiles and existing plans remain supported. Folder entries are a checklist, not automatic tool inputs. No processing runs automatically.</p></description>
     </package>
   </platform>
 </xri>

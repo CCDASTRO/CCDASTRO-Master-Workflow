@@ -1,3 +1,8 @@
+# v0.4.1 / PixInsight build 1718
+
+Catalog/session-plan and HDR regression suites pass, including saved-plan compatibility and interface-only quintic Resample configuration. Native build 1718 constructed MasterDialog and accepted Resample.CardinalQuinticBSpline without processing an image. Final script and manifest signatures verified valid for CCDASTRO. See `validation/build1718-native-check.json` and `validation/v0.4.1-final-signatures.json`.
+
+Registration-project and mixed-resolution mosaic changes provide guidance through existing tools. Actual tool dispatch, calibration, registration, mosaics, resampling and output image quality were not tested in this release. Historical results follow.
 # Prototype verification
 
 - Tool catalog and JSON session-plan roundtrips pass for all five acquisition profiles.

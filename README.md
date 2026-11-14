@@ -1,6 +1,8 @@
 # CCDASTRO Master Workflow
 
-Version 0.4.0 - PixInsight 1.9.6 tool choices.
+Version 0.4.1 - PixInsight build 1718 additions.
+
+Build 1718: registration tools open their native project-aware interfaces. Review movable projects, cached analysis, mixed-resolution mosaics, automatic blending, seam stars and GradientCorrection in the installed scripts. A new **Resample - cardinal quintic B-spline (review)** choice prepares that interpolation in the native interface without executing it. Registration/mosaic defaults remain controlled by their native tools. No session inputs are automatically transferred.
 
 [Changelog](#changelog)
 
@@ -118,6 +120,11 @@ Choose **Integration / masters > HDRComposition**, then **Open tool**. In PixIns
 PixInsight 1.9.5 supports importing the configured instance through launchInterface(); native verification succeeded. No fallback icon is needed on this supported installation. Preparation never executes HDRComposition. New input windows close on cancellation/errors; pre-existing windows are preserved. Synthetic FITS/XISF header, preparation, cancellation and cleanup tests passed; real-image HDR output quality was not tested. Run `node tests/hdr.test.cjs` for focused regressions.
 
 ## Changelog
+
+### v0.4.1 — Build 1718 project and interpolation choices
+
+Adds registration-project and mixed-resolution mosaic guidance, plus a build-gated Resample interface prepared with cardinal quintic B-spline interpolation. No automatic processing; all existing plans remain supported.
+
 
 Release history, newest first. Historical validation statements describe the checks performed for that release.
 

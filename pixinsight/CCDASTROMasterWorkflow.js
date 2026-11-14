@@ -7,7 +7,7 @@
 #include "MasterTools.js"
 #include "HDRPrepare.js"
 
-var TITLE="CCDASTRO Master Workflow 0.4.0";
+var TITLE="CCDASTRO Master Workflow 0.4.1";
 var selectedTool=null;
 function installedScript(tool) {
    var root=CoreApplication.srcDirPath+"/scripts/";
@@ -22,7 +22,7 @@ function scriptHasSignature(path) {
    return true;
 }
 function toolUnavailableReason(tool) {
-   if(tool.minBuild && CoreApplication.versionBuild<tool.minBuild)return "requires PixInsight 1.9.6";
+   if(tool.minBuild && CoreApplication.versionBuild<tool.minBuild)return tool.minBuild>=1718?"requires PixInsight build 1718 or later":"requires PixInsight 1.9.6";
    if(tool.script && !File.exists(installedScript(tool)))return "not installed";
    if(tool.process && !nativeProcessAvailable(tool.process))return "process not installed";
    return "";
@@ -113,9 +113,10 @@ class MasterDialog extends Dialog {
    this.setMinWidth(790);this.adjustToContents();
  }
 }
-function openNative(id) {
+function openNative(id,tool) {
    var process;
    switch(id){
+   case "Resample":process=new Resample;break;
    case "ImageAnalysis":process=new ImageAnalysis;break;
    case "SpectrophotometricFluxCalibration":process=new SpectrophotometricFluxCalibration;break;
    case "MultiscaleGradientCorrection":process=new MultiscaleGradientCorrection;break;
@@ -130,6 +131,10 @@ function openNative(id) {
    case "ChannelCombination":process=new ChannelCombination;break;
    case "LRGBCombination":process=new LRGBCombination;break;
    default:throw new Error("Unsupported native process.");
+   }
+   if(tool&&tool.interpolation){
+      if(CoreApplication.versionBuild<1718||typeof Resample.CardinalQuinticBSpline!=="number")throw new Error("Cardinal quintic interpolation requires build 1718 or later.");
+      process.interpolation=Resample.CardinalQuinticBSpline;
    }
    process.launchInterface();
 }
@@ -146,7 +151,7 @@ function main() {
          File.writeTextFile(shell,'run -x '+(requireSignature?'--require-signature ':'')+'"'+path.replace(/\\/g,"/")+'"\n');
          var pid=ExternalProcess.startDetached(CoreApplication.filePath,["--execute="+CoreApplication.instance+":"+shell]);
          if(!(pid>0)){File.remove(shell);throw new Error("PixInsight could not queue the tool launch.");}
-      }else openNative(selectedTool.process);
+      }else openNative(selectedTool.process,selectedTool);
    }catch(e){new MessageBox(errorMessage(e),TITLE,StdIcon.Error,StdButton.Ok).execute();}
 }
 main();

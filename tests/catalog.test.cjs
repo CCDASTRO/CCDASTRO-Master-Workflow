@@ -63,3 +63,14 @@ const availability=ui.slice(ui.indexOf('function toolUnavailableReason('),ui.ind
 for(const build of [1706,1713]){const ctx={CoreApplication:{versionBuild:build},File:{exists:()=>true},installedScript:t=>t.script,ImageAnalysis:function(){},SpectrophotometricFluxCalibration:function(){},MultiscaleGradientCorrection:function(){}};vm.createContext(ctx);vm.runInContext(availability,ctx);for(const id of Object.keys(expected))assert.equal(ctx.toolUnavailableReason(catalog.tools.find(t=>t.id===id)),build<1713?'requires PixInsight 1.9.6':'');ctx.File.exists=()=>false;assert.equal(ctx.toolUnavailableReason(catalog.tools.find(t=>t.id==='blind')),build<1713?'requires PixInsight 1.9.6':'not installed');delete ctx.ImageAnalysis;assert.equal(ctx.toolUnavailableReason(catalog.tools.find(t=>t.id==='analysis')),build<1713?'requires PixInsight 1.9.6':'process not installed');}
 const native=ui.slice(ui.indexOf('function openNative('),ui.indexOf('function main('));let launched=[];const ctx={};for(const name of ['ImageAnalysis','SpectrophotometricFluxCalibration','MultiscaleGradientCorrection'])ctx[name]=function(){this.launchInterface=()=>launched.push(name);};vm.createContext(ctx);vm.runInContext(native,ctx);for(const name of Object.keys(ctx).filter(k=>k!=='openNative'))ctx.openNative(name);assert.deepEqual(launched,['ImageAnalysis','SpectrophotometricFluxCalibration','MultiscaleGradientCorrection']);
 console.log('PI 1.9.6 choices, stage defaults, legacy plans, availability checks and interface-only native dispatch passed.');
+
+const quintic=catalog.tools.find(t=>t.id==='resample_quintic');assert(quintic);assert.equal(quintic.minBuild,1718);
+for(const profile of catalog.profiles){const plan=catalog.plan(profile,'','',Object.fromEntries(profile.channels.map(c=>[c,''])),{Registration:quintic.id});assert.equal(catalog.validate(JSON.parse(JSON.stringify(plan))),profile);}
+let interpolation;
+const modern={CoreApplication:{versionBuild:1718},Resample:function(){this.launchInterface=()=>{interpolation=this.interpolation;};this.executeOn=()=>{throw Error('Must not process pixels');};}};
+modern.Resample.CardinalQuinticBSpline=10;vm.createContext(modern);vm.runInContext(native,modern);
+modern.openNative('Resample',quintic);assert.equal(interpolation,10);
+modern.CoreApplication.versionBuild=1713;assert.throws(()=>modern.openNative('Resample',quintic),/1718/);
+assert.match(catalog.tools.find(t=>t.id==='astroreg').note,/mixed-resolution mosaics/);
+assert.match(catalog.tools.find(t=>t.id==='fft').note,/persistent registration projects/);
+console.log('Build 1718 review-only quintic interpolation, saved plans and registration-project guidance passed.');

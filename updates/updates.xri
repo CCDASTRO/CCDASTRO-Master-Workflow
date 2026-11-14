@@ -4,12 +4,12 @@
       <p>CCDASTRO Master Workflow - existing tools for session masters.</p>
    </description>
    <platform os="all" arch="noarch" version="1.9.5:1.9.6">
-      <package fileName="CCDASTROMasterWorkflow-0.4.0.zip" sha1="b29795dcab3e36626ac4216504e63c285e1a211d" type="script" releaseDate="20261101122141">
-         <title>CCDASTRO Master Workflow 0.4.0</title>
+      <package fileName="CCDASTROMasterWorkflow-0.4.1.zip" sha1="e0b06425c6f0a815aaf65930896a630c3b912b52" type="script" releaseDate="20261114234613">
+         <title>CCDASTRO Master Workflow 0.4.1</title>
          <description>
-            <p>Launch-only session planning with PI 1.9.6 ImageAnalysis, BlindSolver, astrometric/lunar registration, mosaic calibration and WBPP log analysis choices. Five acquisition profiles and existing plans remain supported. Folder entries are a checklist, not automatic tool inputs. No processing runs automatically.</p>
+            <p>Launch-only session planning with build 1718 registration-project/mixed-resolution mosaic guidance and a review-only cardinal quintic B-spline Resample choice. Five acquisition profiles and existing plans remain supported. Folder entries are a checklist, not automatic tool inputs. No processing runs automatically.</p>
          </description>
       </package>
    </platform>
 </xri>
-<Signature developerId="CCDASTRO" timestamp="2026-11-01T12:21:51.674Z" encoding="Base64">1nsnw5rx7DGmtbgxiLQjvtxDMeq8ry4NH18CQMRHG07Ss4lvnVpHcrO0ZCMl2vof9m7KN5wrBzZSbaIZUB7/CQ==</Signature>
+<Signature developerId="CCDASTRO" timestamp="2026-11-14T23:47:56.505Z" encoding="Base64">hBQtaYYVB8Tgsmy91cI7Xs9TxKCM2cxjSwmtYgPKo1anLL0kE/vJqXhOv1Lr7j/hOo7FgUCH+y8mxx7EofRhCA==</Signature>

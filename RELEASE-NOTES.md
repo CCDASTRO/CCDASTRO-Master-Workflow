@@ -1,3 +1,7 @@
+# v0.4.1 — Build 1718
+
+Adds registration-project/mixed-resolution mosaic guidance and a build-gated, review-only Resample choice configured with cardinal quintic B-spline interpolation. No automatic processing or vendor-code bundle. Existing plans and default choices remain compatible. Signed-source and package validation are recorded in SIGNING.md.
+
 # v0.4.0 - PixInsight 1.9.6 tool choices
 
 Adds ImageAnalysis, BlindSolver, AstrometricRegistration, FeatureRegistration (lunar/daylight), native SPFC/MGC mosaic-preparation interfaces, and WBPPLogAnalysis. New groups cover subframe analysis, mosaic preparation and diagnostics. These choices require PI 1.9.6; older installations show a clear requirement rather than attempting to launch them. Existing choices and version-1 session plans remain supported.

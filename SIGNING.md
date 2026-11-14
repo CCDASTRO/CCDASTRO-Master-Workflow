@@ -1,3 +1,10 @@
+# Release signing - v0.4.1
+
+PixInsight 1.9.6 build 1718 verified the final script and update manifest as valid for CCDASTRO. See `validation/v0.4.1-final-signatures.json`. Package SHA-1: `e0b06425c6f0a815aaf65930896a630c3b912b52`. The ZIP has exactly the three source files and main signature, matching signed source bytes. No signed bytes were changed after signing.
+
+Catalog/session-plan and HDR suites pass. Native build 1718 constructed the updated MasterDialog and accepted the cardinal quintic B-spline Resample enum; see `validation/build1718-native-check.json`. No tool dispatch or real-image processing was executed. The new option opens a native interface for review only.
+
+For future releases, sign the main script with both local includes present, run `validation/verify-v0.4.1-script.js`, build the package, sign the generated manifest, then run `validation/verify-v0.4.1-release.js`. Never rebuild a signed manifest. Keep this launcher independent of the post-processing manager.
 # Release signing - v0.4.0
 
 Status: v0.4.0 script and manifest signed November 1, 2026. PixInsight verified both signatures as valid for CCDASTRO; see `validation/v0.4.0-final-signatures.json`. Package SHA-1: `b29795dcab3e36626ac4216504e63c285e1a211d`. Do not rebuild this signed version. Use this project folder, not the separate post-processing Workflow Manager.
