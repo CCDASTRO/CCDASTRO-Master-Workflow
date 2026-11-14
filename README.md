@@ -1,5 +1,7 @@
 # CCDASTRO Master Workflow
 
+[Download the v0.4.1 source ZIP](https://github.com/CCDASTRO/CCDASTRO-Master-Workflow/releases/download/v0.4.1/CCDASTROMasterWorkflow-0.4.1-source.zip). This archive includes source, documentation and tests. For installation, use PixInsight Update Manager or the signed release package.
+
 Version 0.4.1 - PixInsight build 1718 additions.
 
 Build 1718: registration tools open their native project-aware interfaces. Review movable projects, cached analysis, mixed-resolution mosaics, automatic blending, seam stars and GradientCorrection in the installed scripts. A new **Resample - cardinal quintic B-spline (review)** choice prepares that interpolation in the native interface without executing it. Registration/mosaic defaults remain controlled by their native tools. No session inputs are automatically transferred.
