@@ -8,6 +8,8 @@ Build 1718: registration tools open their native project-aware interfaces. Revie
 
 [Changelog](#changelog)
 
+See [current PTeam integration guidance](docs/PTEAM-CURRENT-GUIDANCE.md), updated November 16, 2026.
+
 ## Installation - start here
 
 ### Recommended: PixInsight Update Manager

@@ -1,0 +1,24 @@
+{
+  "build": 1718,
+  "projects": [
+    {
+      "project": "pteam-pi-publish",
+      "scriptValid": true,
+      "manifestValid": true,
+      "developerId": "CCDASTRO",
+      "ok": true
+    },
+    {
+      "project": "pteam-master-publish",
+      "scriptValid": true,
+      "manifestValid": true,
+      "developerId": "CCDASTRO",
+      "ok": true
+    }
+  ],
+  "scope": "Documentation-only publication. Existing scripts and manifests verified natively; no processing or new signing performed.",
+  "package": {
+    "file": "CCDASTROMasterWorkflow-0.4.1.zip",
+    "sha1": "e0b06425c6f0a815aaf65930896a630c3b912b52"
+  }
+}
